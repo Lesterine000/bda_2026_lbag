@@ -1,10 +1,13 @@
 # Credenciales y variables de entorno
 .env
+.env.*
+!.env.example
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
+.venv/
 
 # Jupyter
 .ipynb_checkpoints/

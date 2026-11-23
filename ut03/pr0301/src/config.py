@@ -1,8 +1,12 @@
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
-# Carga las variables del fichero .env
-load_dotenv()
+# Raíz del proyecto (carpeta pr0301), independientemente del directorio desde
+# el que se ejecute el script o el cuaderno.
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env", override=True)
 
 # Credenciales AWS
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -15,6 +19,11 @@ S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 
 # AEMET
 AEMET_API_KEY = os.getenv("AEMET_API_KEY")
+
+# Rutas locales de los catálogos
+DATA_DIR = BASE_DIR / "data"
+RUTA_MITECO = DATA_DIR / "playas.csv"
+RUTA_AEMET = DATA_DIR / "playas_codigos.csv"
 
 # Validación: si falta alguna variable crítica, el programa para
 variables_criticas = {
