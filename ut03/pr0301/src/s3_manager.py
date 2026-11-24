@@ -79,6 +79,13 @@ def crear_bucket_si_no_existe(bucket, region=None):
             )
             return False
 
+        # Credenciales caducadas, truncadas o token inválido
+        if codigo in ("400", "InvalidToken", "InvalidClientTokenId", "ExpiredToken"):
+            raise RuntimeError(
+                "Las credenciales de AWS no son válidas o han caducado. "
+                "Actualiza el .env desde AWS Academy -> AWS Details -> Show."
+            ) from error
+
         # El bucket existe, pero pertenece a otra cuenta
         if codigo in ("403", "AccessDenied"):
             raise PermissionError(
